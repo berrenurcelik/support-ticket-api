@@ -21,8 +21,11 @@ def create_ticket(data: TicketCreate) -> Ticket:
     return ticket
 
 
-def list_tickets() -> list[Ticket]:
-    return list(_tickets.values())
+def list_tickets(status: Status | None = None) -> list[Ticket]:
+    tickets = list(_tickets.values())
+    if status is not None:
+        tickets = [t for t in tickets if t.status == status]
+    return tickets
 
 
 def get_ticket(ticket_id: int) -> Ticket | None:

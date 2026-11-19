@@ -50,3 +50,12 @@ def test_create_ticket_rejects_blank_description():
         json={"title": "Login geht nicht", "description": "   "},
     )
     assert response.status_code == 422
+
+
+def test_filter_by_status_open():
+    client.post("/tickets", json={"title": "Filter Test", "description": "x"})
+    response = client.get("/tickets", params={"status": "open"})
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) >= 1
+    assert all(t["status"] == "open" for t in data)

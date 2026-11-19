@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 
-from app.schemas import Ticket, TicketCreate
+from app.schemas import Status, Ticket, TicketCreate
 from app.store import create_ticket, get_ticket, list_tickets
 
 app = FastAPI(title="Support Ticket API")
@@ -17,8 +17,8 @@ def post_ticket(data: TicketCreate):
 
 
 @app.get("/tickets", response_model=list[Ticket])
-def get_tickets():
-    return list_tickets()
+def get_tickets(status: Status | None = None):
+    return list_tickets(status)
 
 
 @app.get("/tickets/{ticket_id}", response_model=Ticket)
