@@ -29,7 +29,17 @@ class TicketCreate(BaseModel):
         return value
 
 
+class Category(StrEnum):
+    billing = "billing"
+    technical_issue = "technical_issue"
+    account_access = "account_access"
+    feature_request = "feature_request"
+    other = "other"
+
+
 class Ticket(TicketCreate):
     id: int
     status: Status
     created_at: datetime
+    category: Category | None = None
+    summary: str | None = None
