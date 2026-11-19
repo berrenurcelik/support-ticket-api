@@ -42,3 +42,11 @@ def test_create_ticket_keeps_priority():
     )
     assert response.status_code == 201
     assert response.json()["priority"] == "high"
+
+
+def test_create_ticket_rejects_blank_description():
+    response = client.post(
+        "/tickets",
+        json={"title": "Login geht nicht", "description": "   "},
+    )
+    assert response.status_code == 422
