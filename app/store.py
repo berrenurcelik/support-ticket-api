@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from app.schemas import Ticket, TicketCreate
+from app.schemas import Status, Ticket, TicketCreate
 
 _tickets: dict[int, Ticket] = {}
 _next_id = 1
@@ -12,7 +12,8 @@ def create_ticket(data: TicketCreate) -> Ticket:
         id=_next_id,
         title=data.title,
         description=data.description,
-        status="open",
+        priority=data.priority,
+        status=Status.open,
         created_at=datetime.now(),
     )
     _tickets[_next_id] = ticket

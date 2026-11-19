@@ -33,3 +33,12 @@ def test_get_created_ticket():
 def test_get_missing_ticket_returns_404():
     response = client.get("/tickets/99999")
     assert response.status_code == 404
+
+
+def test_create_ticket_keeps_priority():
+    response = client.post(
+        "/tickets",
+        json={"title": "Server down", "description": "Alles tot", "priority": "high"},
+    )
+    assert response.status_code == 201
+    assert response.json()["priority"] == "high"
