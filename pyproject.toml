@@ -1,0 +1,22 @@
+[project]
+name = "support-ticket-api"
+version = "0.1.0"
+description = "Support Ticket API mit FastAPI"
+readme = "README.md"
+authors = [
+    { name = "Berre Nur Celik" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.163.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
